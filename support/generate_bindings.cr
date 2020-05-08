@@ -163,7 +163,7 @@ def get_qt_modules_from_qtpro(version)
 
   if File.exists? pro_file
     File.read_lines(pro_file)
-      .grep(/^addModule\(qt/)
+      .select(/^addModule\(qt/)
       .map{|x| x[/addModule\(qt([^,)]+)/, 1]?}
       .to_a
   end
@@ -252,6 +252,7 @@ if SYSTEM
       libs_dir = $1
     when /QT_VERSION:(.+)\.\d+/
       version = $1
+    else
     end
   end
 
